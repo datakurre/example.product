@@ -21,14 +21,10 @@ after_script:
 env:
   global:
   - secure: ! 'PS7sb6BGp1T02FkDmsxXFs3v4ffgsNE7laPhacAVgPdGPEE5gny73hlVSa5I
-
       CSAoVmlgP0JN49Cmc7q1o3oro3WTtJP9ETqiHP51/A1dNRlqdHlh78O2ZMxj
-
       IuInNNWlw6M5W6KPQdEftngR5Av2FczYlQF5mKt+ataS24gGVco='
   - secure: ! 'CJbvvb4SQ0Xd/C7O9OfR8q5DxZkrSgaFcaBWgBiFoMTGIdsS7z2UayXtB6r/
-
       60aJRktUriChp8vTSGUTjFDXq9sBtogP3Mc2DmL9dZ+Kz16aLYVi2fvhJlPo
-
       SWTdAL36stNxZ5HNzX18nyGHTpc3RcHuCEmbfJ37pTmrVjNDWKY='
   matrix:
   - ROBOT_BROWSER=firefox ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
