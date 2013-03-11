@@ -1,0 +1,36 @@
+---
+language: python
+python: '2.7'
+install:
+- mkdir -p buildout-cache/eggs
+- mkdir -p buildout-cache/downloads
+- python bootstrap.py -c travis.cfg
+- bin/buildout -N -t 3 -c travis.cfg
+- curl -O http://saucelabs.com/downloads/Sauce-Connect-latest.zip
+- unzip Sauce-Connect-latest.zip
+- java -jar Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID
+  -f CONNECTED &
+- JAVA_PID=$!
+before_script:
+- bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
+- export ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
+- export ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
+script: bin/test
+after_script:
+- kill $JAVA_PID
+env:
+  global:
+  - secure: ! 'PS7sb6BGp1T02FkDmsxXFs3v4ffgsNE7laPhacAVgPdGPEE5gny73hlVSa5I
+
+      CSAoVmlgP0JN49Cmc7q1o3oro3WTtJP9ETqiHP51/A1dNRlqdHlh78O2ZMxj
+
+      IuInNNWlw6M5W6KPQdEftngR5Av2FczYlQF5mKt+ataS24gGVco='
+  - secure: ! 'CJbvvb4SQ0Xd/C7O9OfR8q5DxZkrSgaFcaBWgBiFoMTGIdsS7z2UayXtB6r/
+
+      60aJRktUriChp8vTSGUTjFDXq9sBtogP3Mc2DmL9dZ+Kz16aLYVi2fvhJlPo
+
+      SWTdAL36stNxZ5HNzX18nyGHTpc3RcHuCEmbfJ37pTmrVjNDWKY='
+  matrix:
+  - ROBOT_BROWSER=firefox ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
+  - ROBOT_BROWSER=chrome ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
+  - ROBOT_BROWSER=internetexplorer ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
