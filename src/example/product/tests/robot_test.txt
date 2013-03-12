@@ -38,3 +38,6 @@ Start browser
     ...           desired_capabilities=${DESIRED_CAPABILITIES},${BUILD_INFO}
     ${SESSION_ID} =  Get session id
     Set test variable  ${SESSION_ID}  ${SESSION_ID}
+
+Report test status
+    Report sauce status  ${SESSION_ID}  ${TEST_STATUS}  ${TEST_TAGS}

@@ -10,6 +10,16 @@ except ImportError:
     import simplejson as json
 
 
+try:
+    # Inject keyword for getting the selenium session id
+    import Selenium2Library
+    Selenium2Library.keywords._browsermanagement.\
+        _BrowserManagementKeywords.get_session_id = lambda self:\
+        self._cache.current.session_id
+except ImportError:
+    pass
+
+
 class Keywords(object):
 
     def report_sauce_status(self, job_id, test_status, test_tags=[]):
