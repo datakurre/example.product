@@ -3,7 +3,7 @@
 Library  Selenium2Library  timeout=10  implicit_wait=0.5
 Library  example.product.testing_robot.Keywords
 
-Suite Setup  Start browser
+Test Setup  Start browser
 Test Teardown  Run keywords  Report test status  Close All Browsers
 
 *** Variables ***
