@@ -17,8 +17,8 @@ ${PLONE_URL} =  ${ZOPE_URL}/${PLONE_SITE_ID}
 
 ${BROWSER} =  Firefox
 ${REMOTE_URL} =
-${BUILD_NUMBER} =  manual
 ${DESIRED_CAPABILITIES} =  platform:Linux
+${BUILD_NUMBER} =  manual
 ${SESSION_ID} =
 
 *** Test Cases ***
