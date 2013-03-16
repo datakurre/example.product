@@ -18,14 +18,14 @@ after_script:
 - kill $JAVA_PID
 env:
   global:
-  - secure: ! 'fK2olIyxI47+Kr54tCZG5odMsRNYsVzFjq7lozoV0PTsUXOyKzBWw9dkfBXS
-      UVksSpGdG0tYIFlJJnC2zAy3D8HwKx3AfdgWow5iXvWpWDw0kwOSbLgCKg5W
-      sOQGgEBvmUoM/wagVL2qDB8Ea7aQ4vMOewNAwnQCxhhrI4bgDB0='
-  - secure: ! 'Cq4LEHVUeakDruFIOCNeMbjWKn7MjE5jCE9cLIYH1xx7UVwctfwK70I4OYKT
-      SWt1u6d05BwDbRkOhhgO5+hSAxXyHgRcBQAF4vy6MCFmpBlAWTrB0ngShbZm
-      Of0j+1m+8VIObWpqSEqmClv7ZTa5kM1DfqxOl0Ufg/VJgyHyHp0='
   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
+  - secure: ! 'Rnky1vmdbh5FIJQsWUhSnz/dmIVWLW8Km9vmAjyZs4mjUj8X/Nou8OrLe8bn
+      JMdn+IHGb9S4yG8Sxu6OVDZcrlCtHUVQELRQ4tKBZqJtIe8aaCf5+ELCkqbg
+      vLzumacZnf6Wp7VOFmsv0CSJeA6m3ItGfP4kdCTpXdwSoU4ycbs='
+  - secure: ! 'jaNbVQuhwkj0TcQInVbBmQ6E4tvX7DhE90qWAsRoEDn/p3h5WRP3Mt8szN93
+      mvFBisJuwtmMSDtnNn5cSZYlK6/BuRYt3xtVMIM9lLomUiK+9doFVYAo3rR+
+      jqgeuuBEKBOQnaj2BDlLV1j9I+79YjTloCtBOKxwzINLPjcNyR4='
   matrix:
   - ROBOT_BROWSER=firefox ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
   - ROBOT_BROWSER=chrome ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
