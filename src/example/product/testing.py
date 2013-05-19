@@ -43,31 +43,35 @@ EXAMPLE_PRODUCT_FUNCTIONAL_TESTING = FunctionalTesting(
 )
 
 
+import re
+import os
+import httplib
+import base64
 try:
-    # Inject keyword for getting the selenium session id
-    import Selenium2Library
-    Selenium2Library.keywords._browsermanagement.\
-        _BrowserManagementKeywords.get_session_id = lambda self:\
-        self._cache.current.session_id
+    import json
+    assert json  # pyflakes
 except ImportError:
-    pass
+    import simplejson as json
+
+from robot.libraries.BuiltIn import BuiltIn
+
+USERNAME_ACCESS_KEY = re.compile('^(http|https):\/\/([^:]+):([^@]+)@')
 
 
-class Keywords(object):
+class Keywords:
 
-    def report_sauce_status(self, job_id, test_status, test_tags=[]):
-        import base64
-        import httplib
-        import os
+    def report_sauce_status(self, status, tags=[], remote_url=''):
+        """Report test status and tags to SauceLabs
+        """
+        job_id = BuiltIn().get_library_instance(
+            'Selenium2Library')._current_browser().session_id
 
-        try:
-            import json
-            json  # pyflakes
-        except ImportError:
-            import simplejson as json
-
-        username = os.environ.get('SAUCE_USERNAME')
-        access_key = os.environ.get('SAUCE_ACCESS_KEY')
+        if USERNAME_ACCESS_KEY.match(remote_url):
+            username, access_key =\
+                USERNAME_ACCESS_KEY.findall(remote_url)[0][1:]
+        else:
+            username = os.environ.get('SAUCE_USERNAME')
+            access_key = os.environ.get('SAUCE_ACCESS_KEY')
 
         if not job_id:
             return u"No Sauce job id found. Skipping..."
@@ -75,13 +79,12 @@ class Keywords(object):
             return u"No Sauce environment variables found. Skipping..."
 
         token = base64.encodestring('%s:%s' % (username, access_key))[:-1]
-        body = json.dumps({'passed': test_status == 'PASS',
-                           'tags': test_tags})
+        body = json.dumps({'passed': status == 'PASS',
+                           'tags': tags})
 
         connection = httplib.HTTPConnection('saucelabs.com')
         connection.request('PUT', '/rest/v1/%s/jobs/%s' % (
             username, job_id), body,
             headers={'Authorization': 'Basic %s' % token}
         )
-
         return connection.getresponse().status

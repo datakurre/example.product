@@ -19,7 +19,6 @@ ${BROWSER} =  Firefox
 ${REMOTE_URL} =
 ${DESIRED_CAPABILITIES} =  platform:Linux
 ${BUILD_NUMBER} =  manual
-${SESSION_ID} =
 
 *** Test Cases ***
 
@@ -36,13 +35,6 @@ Start browser
     Open browser  ${PLONE_URL}  ${BROWSER}
     ...           remote_url=${REMOTE_URL}
     ...           desired_capabilities=${DESIRED_CAPABILITIES},${BUILD_INFO}
-    Run keyword and ignore error  Set session id
-
-Set session id
-    Keyword should exist  Get session id
-    ${SESSION_ID} =  Get session id
-    Set test variable  ${SESSION_ID}  ${SESSION_ID}
 
 Report test status
-    Run keyword unless  '${SESSION_ID}' == ''
-    ...    Report sauce status  ${SESSION_ID}  ${TEST_STATUS}  ${TEST_TAGS}
+    Report sauce status  ${TEST_STATUS}  ${TEST_TAGS}  ${REMOTE_URL}
