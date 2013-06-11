@@ -28,4 +28,4 @@ env:
   matrix:
   - ROBOT_BROWSER=firefox ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
   - ROBOT_BROWSER=ie ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID,version:6
-  - ROBOT_SELENIUM_VERSION= ROBOT_DESIRED_CAPABILITIES="platform:OS X 10.8,browserName:iPad,version:6,tunnel-identifier:$TRAVIS_JOB_ID"
+  - ROBOT_SELENIUM_VERSION="2.30.0" ROBOT_DESIRED_CAPABILITIES="platform:OS X 10.8,browserName:iPad,version:6,tunnel-identifier:$TRAVIS_JOB_ID"
