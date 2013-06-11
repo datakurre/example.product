@@ -40,7 +40,7 @@ EXAMPLE_PRODUCT_INTEGRATION_TESTING = IntegrationTesting(
     name="ExampleproductLayer:Integration"
 )
 EXAMPLE_PRODUCT_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(AUTOLOGIN_LIBRARY_FIXTURE,
-           EXAMPLE_PRODUCT_FIXTURE, z2.ZSERVER_FIXTURE),
+    bases=(EXAMPLE_PRODUCT_FIXTURE,
+           AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
     name="ExampleproductLayer:Functional"
 )
