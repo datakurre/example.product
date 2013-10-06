@@ -1,20 +1,15 @@
 ---
 language: python
 python: '2.7'
+addons:
+  sauce_connect:
+  - username: $SAUCE_USERNAME
+  - access_key: $SAUCE_ACCESS_KEY
 install:
 - mkdir -p buildout-cache/downloads
 - python bootstrap.py -c travis.cfg
 - bin/buildout -N -t 3 -c travis.cfg
-- curl -O http://saucelabs.com/downloads/Sauce-Connect-latest.zip
-- unzip Sauce-Connect-latest.zip
-- java -jar Sauce-Connect.jar $SAUCE_USERNAME $SAUCE_ACCESS_KEY -i $TRAVIS_JOB_ID
-  -f CONNECTED &
-- JAVA_PID=$!
-before_script:
-- bash -c "while [ ! -f CONNECTED ]; do sleep 2; done"
 script: bin/test
-after_script:
-- kill $JAVA_PID
 env:
   global:
   - secure: ! 'Rnky1vmdbh5FIJQsWUhSnz/dmIVWLW8Km9vmAjyZs4mjUj8X/Nou8OrLe8bn
@@ -28,4 +23,4 @@ env:
   matrix:
   - ROBOT_BROWSER=firefox ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID
   - ROBOT_BROWSER=ie ROBOT_DESIRED_CAPABILITIES=tunnel-identifier:$TRAVIS_JOB_ID,version:6
-  - ROBOT_SELENIUM_VERSION=" " ROBOT_DESIRED_CAPABILITIES="platform:OS X 10.8,browserName:iPad,version:6,tunnel-identifier:$TRAVIS_JOB_ID"
+  - ROBOT_DESIRED_CAPABILITIES="platform:OS X 10.8,browserName:iPad,version:6,tunnel-identifier:$TRAVIS_JOB_ID"
