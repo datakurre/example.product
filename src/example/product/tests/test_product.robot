@@ -12,3 +12,4 @@ Plone site
     [Tags]  start
     Go to  ${PLONE_URL}
     Page should contain  Plone site
+    Capture page screenshot
