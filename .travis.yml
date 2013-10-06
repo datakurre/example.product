@@ -21,7 +21,7 @@ env:
   - secure: Z/OrKwJPv1YhbFYVUcrasEJS+TPYo0JtYFg3f5lPt6EHn3awoapIg7/oHjUIO8mYmo76D2KhltAfpiWAPuWbg7EIb8b2/Vxdbxq6+KeUPwQq0f5VGnwnX8FodOX096pP3VN6RCjGJYmycMQry/q3pUARxQO05D8SOb6rM/aSl9w=
   - secure: hweVjIUGBEFZSZ9Pc5nOm5lN1X8618nnPxW0ybZkdumjh8YU50dlEcDliiUJJ2J0O/dYBfIovbuP6OOwBwVlaGdsdwWNx1gy21AUxHhEGM6PUClvNE3Slk0YdzGEY4wpqIl77LfOuq0bwTMzQEcrn/eBPqqas0ZgOTMRO1UGcWE=
   - ARTIFACTS_AWS_REGION=us-west-2
-  - ARTIFACTS_S3_BUCKET=example-product
+  - ARTIFACTS_S3_BUCKET=example.product
   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
   matrix:
