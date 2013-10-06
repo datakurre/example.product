@@ -12,7 +12,7 @@ install:
 before_script:
 - gem install travis-artifacts
 after_script:
-- travis-artifacts upload --path parts/test
+- travis-artifacts upload --path parts/test --target-path ""
 script: bin/test
 env:
   global:
