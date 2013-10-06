@@ -1,6 +1,5 @@
----
 language: python
-python: '2.7'
+python: "2.7"
 addons:
   sauce_connect:
   - username: $SAUCE_USERNAME
@@ -9,15 +8,19 @@ install:
 - mkdir -p buildout-cache/downloads
 - python bootstrap.py -c travis.cfg
 - bin/buildout -N -t 3 -c travis.cfg
+before_script:
+- gem install travis-artifacts
+after_script:
+- travis-artifacts upload --path parts/test
 script: bin/test
 env:
   global:
-  - secure: ! 'Rnky1vmdbh5FIJQsWUhSnz/dmIVWLW8Km9vmAjyZs4mjUj8X/Nou8OrLe8bn
-      JMdn+IHGb9S4yG8Sxu6OVDZcrlCtHUVQELRQ4tKBZqJtIe8aaCf5+ELCkqbg
-      vLzumacZnf6Wp7VOFmsv0CSJeA6m3ItGfP4kdCTpXdwSoU4ycbs='
-  - secure: ! 'jaNbVQuhwkj0TcQInVbBmQ6E4tvX7DhE90qWAsRoEDn/p3h5WRP3Mt8szN93
-      mvFBisJuwtmMSDtnNn5cSZYlK6/BuRYt3xtVMIM9lLomUiK+9doFVYAo3rR+
-      jqgeuuBEKBOQnaj2BDlLV1j9I+79YjTloCtBOKxwzINLPjcNyR4='
+  - secure: Rnky1vmdbh5FIJQsWUhSnz/dmIVWLW8Km9vmAjyZs4mjUj8X/Nou8OrLe8bn JMdn+IHGb9S4yG8Sxu6OVDZcrlCtHUVQELRQ4tKBZqJtIe8aaCf5+ELCkqbg vLzumacZnf6Wp7VOFmsv0CSJeA6m3ItGfP4kdCTpXdwSoU4ycbs=
+  - secure: jaNbVQuhwkj0TcQInVbBmQ6E4tvX7DhE90qWAsRoEDn/p3h5WRP3Mt8szN93 mvFBisJuwtmMSDtnNn5cSZYlK6/BuRYt3xtVMIM9lLomUiK+9doFVYAo3rR+ jqgeuuBEKBOQnaj2BDlLV1j9I+79YjTloCtBOKxwzINLPjcNyR4=
+  - secure: Z/OrKwJPv1YhbFYVUcrasEJS+TPYo0JtYFg3f5lPt6EHn3awoapIg7/oHjUIO8mYmo76D2KhltAfpiWAPuWbg7EIb8b2/Vxdbxq6+KeUPwQq0f5VGnwnX8FodOX096pP3VN6RCjGJYmycMQry/q3pUARxQO05D8SOb6rM/aSl9w=
+  - secure: hweVjIUGBEFZSZ9Pc5nOm5lN1X8618nnPxW0ybZkdumjh8YU50dlEcDliiUJJ2J0O/dYBfIovbuP6OOwBwVlaGdsdwWNx1gy21AUxHhEGM6PUClvNE3Slk0YdzGEY4wpqIl77LfOuq0bwTMzQEcrn/eBPqqas0ZgOTMRO1UGcWE=
+  - ARTIFACTS_AWS_REGION=us-east-1
+  - ARTIFACTS_S3_BUCKET=example-product
   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
   matrix:
