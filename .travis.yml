@@ -12,7 +12,7 @@ install:
 before_script:
 - gem install travis-artifacts
 after_script:
-- travis-artifacts upload --path parts/test --target-path ""
+- travis-artifacts upload --path parts/test
 script: bin/test
 env:
   global:
@@ -21,7 +21,6 @@ env:
   - secure: mpcPe3Hu8WS6t+opPHvVKyuHlFvwHBbTJEy8CpDcwPlZ0Dm3jDj1T+kYX7zT3MQ7Vu1n2nGYTjIEP4cfiBy5XHwXHjO/9rRiC3WdI2MH7MDrOp++LujxQcZj1004lfxnKl8UondyBnCYB1g/EzWUQm/tsFrity0W+dK7rNgj/zU=
   - secure: EmHQq8xH7WMj0mnUaucr8ZWLFtYSQhoNq8VbaVfJ+jytI6rMZV3305oBzf2HgOjtNxW09e7UVUu1b7L7TYJqoVNyixb1R1cxPn43L5/oF9NnU08IG+Agojufk7kTzMt+xRsqVQkGbdngfdxzYHSUJnQvpi6AquTE1F3lkntrCBI=
   - ARTIFACTS_S3_BUCKET=example.product
-  - ARTIFACTS_AWS_REGION=us-east-1
   - ROBOT_BUILD_NUMBER=travis-$TRAVIS_BUILD_NUMBER
   - ROBOT_REMOTE_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub
   matrix:
